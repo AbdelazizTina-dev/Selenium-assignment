@@ -32,4 +32,7 @@ class PageBase {
         return bodyElement.getText();
     }
    
+    public String getURL() {
+        return this.driver.getCurrentUrl();
+    }
 }

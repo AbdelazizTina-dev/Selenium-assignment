@@ -47,6 +47,14 @@ public class SeleniumTest {
         Assert.assertTrue(mainPage.getBodyText().contains("Sign in / Create an account"));
     }
 
+    @Test
+    public void testStaticPage(){
+        mainPage.acceptCookies();
+        StaticPage staticPage= mainPage.goToStaticPage();
+        Assert.assertTrue(staticPage.getBodyText().contains("Digital Foundry"));
+        Assert.assertEquals("https://www.eurogamer.net/pc",staticPage.getURL());
+    }
+
     @After
     public void close() {
         if (driver != null) {

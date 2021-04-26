@@ -21,6 +21,7 @@ class MainPage extends PageBase {
     private By usernameFieldBy = By.xpath("//form//input[@id='login-username']");
     private By passFieldBy = By.xpath("//form/input[@name='password']");
     private By logoutBy = By.xpath("//body[@id='theTop']/header/div/div/form/button");
+    private By staticPcPageBy = By.xpath("//div//a[@href='/pc']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -41,4 +42,9 @@ class MainPage extends PageBase {
     public void logout(){
         this.waitAndReturnElement(logoutBy).click();
     }   
+
+    public StaticPage goToStaticPage(){
+        this.waitAndReturnElement(staticPcPageBy).click();
+        return new StaticPage(this.driver);
+    }
 }
