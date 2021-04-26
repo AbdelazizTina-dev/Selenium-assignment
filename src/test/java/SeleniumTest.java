@@ -17,6 +17,7 @@ import java.util.*;
 public class SeleniumTest {
     public WebDriver driver;
     public MainPage mainPage;
+
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -38,14 +39,14 @@ public class SeleniumTest {
         mainPage.login(); 
         Assert.assertTrue(mainPage.getBodyText().contains("Signed in as SeleBot1244"));
     }
-
+    
     @Test
     public void testLogout(){
         mainPage.acceptCookies();
         mainPage.login(); 
         mainPage.logout();
         Assert.assertTrue(mainPage.getBodyText().contains("Sign in / Create an account"));
-    }
+    } 
 
     @Test
     public void testStaticPage(){
@@ -53,6 +54,14 @@ public class SeleniumTest {
         StaticPage staticPage= mainPage.goToStaticPage();
         Assert.assertTrue(staticPage.getBodyText().contains("Digital Foundry"));
         Assert.assertEquals("https://www.eurogamer.net/pc",staticPage.getURL());
+    }
+
+    @Test
+    public void testUserForm(){
+        mainPage.acceptCookies();
+        mainPage.login();
+        mainPage.fillNewsletterForm();
+        Assert.assertTrue(mainPage.getBodyText().contains("You're subscribed to this newsletter. Nice one!"));
     }
 
     @After

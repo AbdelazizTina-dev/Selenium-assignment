@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-
+import org.openqa.selenium.Keys;
 
 class MainPage extends PageBase {
 
@@ -22,6 +22,8 @@ class MainPage extends PageBase {
     private By passFieldBy = By.xpath("//form/input[@name='password']");
     private By logoutBy = By.xpath("//body[@id='theTop']/header/div/div/form/button");
     private By staticPcPageBy = By.xpath("//div//a[@href='/pc']");
+    private By newsletterEmailBy = By.xpath("//div[@id='newsletter-promo']//input[@name='email']");
+    private By newsletterSubBy = By.xpath("//div[@id='newsletter-promo']//button[@class='button']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -46,5 +48,12 @@ class MainPage extends PageBase {
     public StaticPage goToStaticPage(){
         this.waitAndReturnElement(staticPcPageBy).click();
         return new StaticPage(this.driver);
+    }
+
+    public void fillNewsletterForm(){
+        this.waitAndReturnElement(newsletterEmailBy).sendKeys(Keys.CONTROL + "a");
+        this.waitAndReturnElement(newsletterEmailBy).sendKeys(Keys.DELETE);
+        this.waitAndReturnElement(newsletterEmailBy).sendKeys("vikasa4698@quossum.com");
+        this.waitAndReturnElement(newsletterSubBy).click();
     }
 }
