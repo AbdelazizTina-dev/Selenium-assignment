@@ -24,6 +24,7 @@ class MainPage extends PageBase {
     private By staticPcPageBy = By.xpath("//div//a[@href='/pc']");
     private By newsletterEmailBy = By.xpath("//div[@id='newsletter-promo']//input[@name='email']");
     private By newsletterSubBy = By.xpath("//div[@id='newsletter-promo']//button[@class='button']");
+    private By inboxBy = By.xpath("//div/a[@href='/inbox']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -55,5 +56,10 @@ class MainPage extends PageBase {
         this.waitAndReturnElement(newsletterEmailBy).sendKeys(Keys.DELETE);
         this.waitAndReturnElement(newsletterEmailBy).sendKeys("vikasa4698@quossum.com");
         this.waitAndReturnElement(newsletterSubBy).click();
+    }
+
+    public InboxPage openInboxPage(){
+        this.waitAndReturnElement(inboxBy).click();
+        return new InboxPage(this.driver);
     }
 }

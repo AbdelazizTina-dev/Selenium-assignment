@@ -28,7 +28,7 @@ public class SeleniumTest {
         mainPage = new MainPage(this.driver);
     }
 
-    @Test
+/*     @Test
     public void testTitle(){
         Assert.assertEquals("Eurogamer.net",driver.getTitle());
     }
@@ -62,6 +62,15 @@ public class SeleniumTest {
         mainPage.login();
         mainPage.fillNewsletterForm();
         Assert.assertTrue(mainPage.getBodyText().contains("You're subscribed to this newsletter. Nice one!"));
+    } */
+
+    @Test
+    public void testMarkNotificationsAsRead(){
+        mainPage.acceptCookies();
+        mainPage.login();
+        InboxPage inboxPage = mainPage.openInboxPage();
+        inboxPage.markAllRead();
+        Assert.assertEquals("https://www.eurogamer.net/inbox",inboxPage.getURL());
     }
 
     @After
