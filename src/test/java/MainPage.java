@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Keys;
-
 class MainPage extends PageBase {
 
 
@@ -25,6 +24,7 @@ class MainPage extends PageBase {
     private By newsletterEmailBy = By.xpath("//div[@id='newsletter-promo']//input[@name='email']");
     private By newsletterSubBy = By.xpath("//div[@id='newsletter-promo']//button[@class='button']");
     private By inboxBy = By.xpath("//div/a[@href='/inbox']");
+    private By profileBy = By.xpath("//p//a[@href='/profiles/SeleBot1244']");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -61,5 +61,10 @@ class MainPage extends PageBase {
     public InboxPage openInboxPage(){
         this.waitAndReturnElement(inboxBy).click();
         return new InboxPage(this.driver);
+    }
+
+    public ProfilePage openProfilePage(){
+        this.waitAndReturnElement(profileBy).click();
+        return new ProfilePage(this.driver);
     }
 }

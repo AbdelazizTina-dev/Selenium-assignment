@@ -28,7 +28,7 @@ public class SeleniumTest {
         mainPage = new MainPage(this.driver);
     }
 
-/*     @Test
+    @Test
     public void testTitle(){
         Assert.assertEquals("Eurogamer.net",driver.getTitle());
     }
@@ -40,6 +40,14 @@ public class SeleniumTest {
         Assert.assertTrue(mainPage.getBodyText().contains("Signed in as SeleBot1244"));
     }
     
+    @Test
+    public void testUserForm(){
+        mainPage.acceptCookies();
+        mainPage.login();
+        mainPage.fillNewsletterForm();
+        Assert.assertTrue(mainPage.getBodyText().contains("You're subscribed to this newsletter. Nice one!"));
+    } 
+
     @Test
     public void testLogout(){
         mainPage.acceptCookies();
@@ -57,20 +65,21 @@ public class SeleniumTest {
     }
 
     @Test
-    public void testUserForm(){
-        mainPage.acceptCookies();
-        mainPage.login();
-        mainPage.fillNewsletterForm();
-        Assert.assertTrue(mainPage.getBodyText().contains("You're subscribed to this newsletter. Nice one!"));
-    } */
-
-    @Test
     public void testMarkNotificationsAsRead(){
         mainPage.acceptCookies();
         mainPage.login();
         InboxPage inboxPage = mainPage.openInboxPage();
         inboxPage.markAllRead();
         Assert.assertEquals("https://www.eurogamer.net/inbox",inboxPage.getURL());
+    }
+
+    @Test
+    public void testChangeNickname(){
+        mainPage.acceptCookies();
+        mainPage.login();
+        ProfilePage profilePage = mainPage.openProfilePage();
+        profilePage.editName();
+        Assert.assertTrue(profilePage.getBodyText().contains("Profile settings saved."));
     }
 
     @After
